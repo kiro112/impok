@@ -1,1 +1,1 @@
-# impok
+# sinop
