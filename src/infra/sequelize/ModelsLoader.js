@@ -4,7 +4,7 @@ const path = require('path');
 module.exports = {
   load({ sequelize, baseFolder, indexFile = 'index.js' }) {
     const loaded = {};
-
+  
     fs
       .readdirSync(baseFolder)
       .filter((file) => {
@@ -13,6 +13,7 @@ module.exports = {
       .forEach((file) => {
         const model = sequelize['import'](path.join(baseFolder, file));
         const modelName = file.split('.')[0];
+
         loaded[modelName] = model;
       });
 

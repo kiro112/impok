@@ -1,8 +1,11 @@
 'use strict';
 
 module.exports = function(sequelize, DataTypes) {
-  const User = sequelize.define('user', {
-    name: DataTypes.STRING
+  const JobLevel = sequelize.define('job_level', {
+    level: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    }
   }, {
     classMethods: {
       associate() {
@@ -11,5 +14,5 @@ module.exports = function(sequelize, DataTypes) {
     }
   });
 
-  return User;
+  return JobLevel;
 };
