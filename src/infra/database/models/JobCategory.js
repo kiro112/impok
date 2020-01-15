@@ -1,19 +1,18 @@
 'use strict';
 
 module.exports = function(sequelize, DataTypes) {
-  const UserGroup = sequelize.define('user_group', {
-    name: {
+  const JobCategory = sequelize.define('job_category', {
+    category: {
       type: DataTypes.STRING,
       allowNull: false,
     }
   }, {
     classMethods: {
-      associate(models) {
+      associate() {
         // associations can be defined here
-        UserGroup.hasMany(models.Employee);
       }
     }
   });
 
-  return UserGroup;
+  return JobCategory;
 };

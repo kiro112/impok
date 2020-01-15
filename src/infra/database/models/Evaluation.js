@@ -5,25 +5,12 @@ module.exports = function(sequelize, DataTypes) {
     status: {
       type: DataTypes.STRING,
       allowNull: false,
-      defaultValue: 'Pending'
-    },
+      defaultValue: 'PENDING'
+    }
   }, {
     classMethods: {
-      associate(models) {
+      associate() {
         // associations can be defined here
-
-        Evaluation.belongsTo(models.Form, {
-          foreignKey: 'form_id'
-        });
-
-        Evaluation.belongsTo(models.Employee, {
-          foreignKey: 'employee_id'
-        });
-
-        Evaluation.belongsTo(models.Employee, {
-          foreignKey: 'manager_id'
-        });
-
       }
     }
   });

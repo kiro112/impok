@@ -6,18 +6,16 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    description: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
+    description: DataTypes.STRING,
     weight: {
-      type: DataTypes.STRING,
-      allowNull: false,
+      type: DataTypes.INTEGER.UNSIGNED,
+      defaultValue: 0,
     }
   }, {
     classMethods: {
-      associate() {
+      associate(models) {
         // associations can be defined here
+        CompetencyGroup.hasMany(models.Competency);
       }
     }
   });

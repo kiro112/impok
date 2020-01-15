@@ -1,12 +1,8 @@
 'use strict';
 
 module.exports = function(sequelize, DataTypes) {
-  const FormText = sequelize.define('form_text', {
-    title: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    content: {
+  const FormTemplate = sequelize.define('form_template', {
+    rating_scale: {
       type: DataTypes.STRING,
       allowNull: false,
     },
@@ -14,13 +10,11 @@ module.exports = function(sequelize, DataTypes) {
     classMethods: {
       associate(models) {
         // associations can be defined here
-
-        FormText.belongsTo(models.Form, {
-          foreignKey: 'form_id'
-        });
+        FormTemplate.belongsTo(models.FormType);
+        FormTemplate.belongsTo(models.JobPosition);
       }
     }
   });
 
-  return FormText;
+  return FormTemplate;
 };

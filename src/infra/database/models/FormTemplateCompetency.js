@@ -1,22 +1,18 @@
 'use strict';
 
 module.exports = function(sequelize, DataTypes) {
-  const FormComment = sequelize.define('form_comment', {
-    content: {
+  const FormTemplateCompetency = sequelize.define('form_template_competency', {
+    weight: {
       type: DataTypes.STRING,
       allowNull: false,
     },
   }, {
     classMethods: {
-      associate(models) {
+      associate() {
         // associations can be defined here
-
-        FormComment.belongsTo(models.Form, {
-          foreignKey: 'form_id'
-        });
       }
     }
   });
 
-  return FormComment;
+  return FormTemplateCompetency;
 };

@@ -6,22 +6,15 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    description: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
+    description: DataTypes.STRING,
     weight: {
-      type: DataTypes.STRING,
-      allowNull: false,
+      type: DataTypes.INTEGER.UNSIGNED,
+      defaultValue: 0,
     }
   }, {
     classMethods: {
-      associate(models) {
+      associate() {
         // associations can be defined here
-        Competency.belongsTo(models.CompetencyGroup, {
-          foreignKey: 'competency_group_id'
-        });
-
       }
     }
   });

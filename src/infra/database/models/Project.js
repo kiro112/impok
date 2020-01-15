@@ -8,8 +8,9 @@ module.exports = function(sequelize, DataTypes) {
     }
   }, {
     classMethods: {
-      associate() {
+      associate(models) {
         // associations can be defined here
+        Project.hasMany(models.EmployeeProject);
       }
     }
   });

@@ -10,7 +10,6 @@ module.exports = function(sequelize, DataTypes) {
     classMethods: {
       associate(models) {
         // associations can be defined here
-
         JobPosition.belongsTo(models.JobFamily, {
           foreignKey: 'job_family_id'
         });
@@ -27,6 +26,11 @@ module.exports = function(sequelize, DataTypes) {
           foreignKey: 'job_level_id'
         });
 
+        JobPosition.belongsTo(models.JobCategory, {
+          foreignKey: 'job_category_id'
+        });
+
+        JobPosition.hasMany(models.Employee);
       }
     }
   });

@@ -8,11 +8,11 @@ module.exports = function(sequelize, DataTypes) {
     }
   }, {
     classMethods: {
-      associate(models) {
+      associate() {
         // associations can be defined here
-        JobFamily.hasMany(models.JobDesignation, {
-          foreignKey: 'job_family_id'
-        });
+        // JobFamily.hasMany(models.JobDesignation, {
+        //   foreignKey: 'job_family_id'
+        // });
       }
     }
   });
