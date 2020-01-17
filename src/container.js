@@ -3,16 +3,10 @@ const { scopePerRequest } = require('awilix-express');
 
 const config = require('../config');
 const Application = require('./app/Application');
-// const {
-//   CreateUser,
-//   GetAllUsers,
-//   GetUser,
-//   UpdateUser,
-//   DeleteUser
-// } = require('./app/user');
 
 const {
-  GetAllJobFamilies
+  GetAllJobFamilies,
+  GetJobFamily,
 } = require('./app/jobfamily');
 
 
@@ -33,7 +27,6 @@ const SequelizeJobFamilyRepository = require('./infra/jobfamily/SequelizeJobFami
 const { 
   database,
   JobFamily: JobFamilyModel, 
-  // User: UserModel 
 } = require('./infra/database/models');
 
 
@@ -80,15 +73,9 @@ container.register({
 });
 
 // Operations
-// container.register({
-//   createUser: asClass(CreateUser),
-//   getAllUsers: asClass(GetAllUsers),
-//   getUser: asClass(GetUser),
-//   updateUser: asClass(UpdateUser),
-//   deleteUser: asClass(DeleteUser)
-// });
 container.register({
-  getAllJobFamilies: asClass(GetAllJobFamilies)
+  getAllJobFamilies: asClass(GetAllJobFamilies),
+  getJobFamily: asClass(GetJobFamily),
 });
 
 

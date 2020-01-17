@@ -43,7 +43,7 @@ class SequelizeJobFamiliesRepository {
   // Private
   async _getById(id) {
     try {
-      return await this.JobFamilyModel.findByPk(id, { rejectOnEmpty: true });
+      return await this.JobFamilyModel.findById(id, { rejectOnEmpty: true });
     } catch(error) {
       if (error.name === 'SequelizeEmptyResultError') {
         const notFoundError = new Error('NotFoundError');

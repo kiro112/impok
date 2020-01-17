@@ -11,6 +11,7 @@ const JobFamilyController = {
     router.use(inject('jobFamilySerializer'));
 
     router.get('/', inject('getAllJobFamilies'), this.index);
+    router.get('/:id', inject('getJobFamily'), this.show);
 
     return router;
   },
@@ -29,7 +30,31 @@ const JobFamilyController = {
       .on(ERROR, next);
 
     getAllJobFamilies.execute();
-  }  
+  },
+
+  show(req, res, next) {
+
+    const { getJobFamily, jobFamilySerializer } = req;
+    const { SUCCESS, ERROR, NOT_FOUND } = getJobFamily.outputs;
+
+    getJobFamily
+      .on(SUCCESS, family => {
+        res
+          .status(200)
+          .json(jobFamilySerializer.serialize(family));
+      })
+      .on(NOT_FOUND, error => {
+        res
+          .status(Status.NOT_FOUND)
+          .json({
+            type: 'NotFoundError',
+            details: error.details
+          })
+          .on(ERROR, next);
+      });
+
+    getJobFamily.execute(Number(req.params.id));
+  }
 };
 
 module.exports = JobFamilyController;
