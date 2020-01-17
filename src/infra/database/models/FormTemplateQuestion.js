@@ -9,11 +9,16 @@ module.exports = function(sequelize, DataTypes) {
     description: {
       type: DataTypes.STRING,
       allowNull: true
+    },
+    group_item_order: {
+      type: DataTypes.INTEGER.UNSIGNED,
+      allowNull: false
     }
   }, {
     classMethods: {
-      associate() {
+      associate(models) {
         // associations can be defined here
+        FormTemplateQuestion.belongsTo(models.FormTemplateCompetencyGroup);
       }
     }
   });

@@ -1,20 +1,21 @@
 'use strict';
 
 module.exports = function(sequelize, DataTypes) {
-  const CompetencyGroup = sequelize.define('competency_group', {
-    name: {
+  const WorkflowComment = sequelize.define('workflow_comment', {
+    comment: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    description: DataTypes.STRING
+    timestamp: DataTypes.DATE
   }, {
     classMethods: {
       associate(models) {
         // associations can be defined here
-        CompetencyGroup.hasMany(models.Competency);
+        WorkflowComment.belongsTo(models.Workflow);
+        WorkflowComment.belongsTo(models.Employee);
       }
     }
   });
 
-  return CompetencyGroup;
+  return WorkflowComment;
 };

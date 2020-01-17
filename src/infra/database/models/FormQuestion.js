@@ -1,12 +1,19 @@
 'use strict';
 
 module.exports = function(sequelize, DataTypes) {
-  const FormTemplateText = sequelize.define('form_template_text', {
+  const FormQuestion = sequelize.define('form_question', {
     title: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    content: DataTypes.TEXT,
+    description: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    answer: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
     group_item_order: {
       type: DataTypes.INTEGER.UNSIGNED,
       allowNull: false
@@ -15,10 +22,10 @@ module.exports = function(sequelize, DataTypes) {
     classMethods: {
       associate(models) {
         // associations can be defined here
-        FormTemplateText.belongsTo(models.FormTemplateCompetencyGroup);
+        FormQuestion.belongsTo(models.FormCompetencyGroup);
       }
     }
   });
 
-  return FormTemplateText;
+  return FormQuestion;
 };

@@ -10,27 +10,16 @@ module.exports = function(sequelize, DataTypes) {
     classMethods: {
       associate(models) {
         // associations can be defined here
-        JobPosition.belongsTo(models.JobFamily, {
-          foreignKey: 'job_family_id'
-        });
+        JobPosition.belongsTo(models.JobFamily);
 
-        JobPosition.belongsTo(models.JobDesignation, {
-          foreignKey: 'job_designation_id'
-        });
+        JobPosition.belongsTo(models.JobDesignation);
 
-        JobPosition.belongsTo(models.JobRole, {
-          foreignKey: 'job_role_id'
-        });
+        JobPosition.belongsTo(models.JobRole);
 
-        JobPosition.belongsTo(models.JobLevel, {
-          foreignKey: 'job_level_id'
-        });
+        JobPosition.belongsTo(models.JobLevel);
 
-        JobPosition.belongsTo(models.JobCategory, {
-          foreignKey: 'job_category_id'
-        });
+        JobPosition.belongsTo(models.JobCategory);
 
-        JobPosition.hasMany(models.Employee);
       }
     }
   });

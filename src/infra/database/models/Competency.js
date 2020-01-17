@@ -6,11 +6,7 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    description: DataTypes.STRING,
-    weight: {
-      type: DataTypes.INTEGER.UNSIGNED,
-      defaultValue: 0,
-    }
+    description: DataTypes.STRING
   }, {
     classMethods: {
       associate() {

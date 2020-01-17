@@ -1,11 +1,12 @@
 'use strict';
 
 module.exports = function(sequelize, DataTypes) {
-  const FormTemplateCompetency = sequelize.define('form_template_competency', {
-    weight: {
-      type: DataTypes.INTEGER,
+  const FormText = sequelize.define('form_text', {
+    title: {
+      type: DataTypes.STRING,
       allowNull: false,
     },
+    content: DataTypes.TEXT,
     group_item_order: {
       type: DataTypes.INTEGER.UNSIGNED,
       allowNull: false
@@ -14,11 +15,10 @@ module.exports = function(sequelize, DataTypes) {
     classMethods: {
       associate(models) {
         // associations can be defined here
-        FormTemplateCompetency.belongsTo(models.FormTemplateCompetencyGroup);
-        FormTemplateCompetency.belongsTo(models.Competency);
+        FormText.belongsTo(models.FormCompetencyGroup);
       }
     }
   });
 
-  return FormTemplateCompetency;
+  return FormText;
 };

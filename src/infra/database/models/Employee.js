@@ -8,8 +8,10 @@ module.exports = function(sequelize, DataTypes) {
     }
   }, {
     classMethods: {
-      associate() {
+      associate(models) {
         // associations can be defined here
+        Employee.belongsTo(models.JobPosition);
+        Employee.belongsTo(models.UserGroup);
       }
     }
   });
