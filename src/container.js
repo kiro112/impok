@@ -7,11 +7,11 @@ const Application = require('./app/Application');
 const {
   GetAllJobFamilies,
   GetJobFamily,
+  CreateJobFamily,
 } = require('./app/jobfamily');
 
 
 const JobFamilySerializer = require('./interfaces/http/jobfamily/JobFamilySerializer');
-// const UserSerializer = require('./interfaces/http/user/UserSerializer');
 
 const Server = require('./interfaces/http/Server');
 const router = require('./interfaces/http/router');
@@ -76,6 +76,7 @@ container.register({
 container.register({
   getAllJobFamilies: asClass(GetAllJobFamilies),
   getJobFamily: asClass(GetJobFamily),
+  createJobFamily: asClass(CreateJobFamily),
 });
 
 
