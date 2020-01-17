@@ -38,7 +38,8 @@ module.exports = ({ config, containerMiddleware, loggerMiddleware, errorHandler,
    * The `controllerPath` is relative to the `interfaces/http` folder
    */
 
-  apiRouter.use('/users', controller('user/UsersController'));
+  // apiRouter.use('/users', controller('user/UsersController'));
+  apiRouter.use('/job-families', controller('jobfamily/JobFamilyController'));
 
   router.use('/api', apiRouter);
 
