@@ -4,10 +4,6 @@ const path = require('path');
 module.exports = {
   load({ sequelize, baseFolder, indexFile = 'index.js' }) {
     const loaded = {};
-
-    sequelize.sync({
-      force: true
-    });
   
     fs
       .readdirSync(baseFolder)
