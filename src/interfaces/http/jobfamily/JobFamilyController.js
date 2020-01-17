@@ -14,6 +14,7 @@ const JobFamilyController = {
     router.get('/:id', inject('getJobFamily'), this.show);
     router.post('/', inject('createJobFamily'), this.create);
     router.put('/:id', inject('updateJobFamily'), this.update);
+    router.delete('/:id', inject('deleteJobFamily'), this.remove);
 
     return router;
   },
@@ -127,6 +128,33 @@ const JobFamilyController = {
       .on(ERROR, next);
     
     updateJobFamily.execute(Number(req.params.id), req.body);
+  },
+
+  remove(req, res, next) {
+    const { deleteJobFamily } = req;
+    const {
+      SUCCESS,
+      ERROR,
+      NOT_FOUND
+    } = deleteJobFamily.outputs;
+
+    deleteJobFamily
+      .on(SUCCESS, () => {
+        res
+          .status(Status.OK)
+          .end();
+      })
+      .on(NOT_FOUND, error => {
+        res
+          .status(Status.NOT_FOUND)
+          .json({
+            type: 'NotFoundError',
+            details: error.details
+          });
+      })
+      .on(ERROR, next);
+
+    deleteJobFamily.execute(Number(req.params.id));
   }
 };
 

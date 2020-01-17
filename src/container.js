@@ -8,7 +8,8 @@ const {
   GetAllJobFamilies,
   GetJobFamily,
   CreateJobFamily,
-  UpdateJobFamily
+  UpdateJobFamily,
+  DeleteJobFamily
 } = require('./app/jobfamily');
 
 
@@ -76,6 +77,7 @@ container.register({
   getJobFamily: asClass(GetJobFamily),
   createJobFamily: asClass(CreateJobFamily),
   updateJobFamily: asClass(UpdateJobFamily),
+  deleteJobFamily: asClass(DeleteJobFamily),
 });
 
 
