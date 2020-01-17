@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "Node API boilerplate",
+    "title": "Sinop API",
     "version": "v1"
   },
   "servers": [
@@ -186,6 +186,33 @@
   },
   "components": {
     "schemas": {
+      "JobFamily": {
+        "allOf": [
+          { "$ref": "#/components/schemas/NewJobFamily"},
+          {
+            "required": [ "id" ],
+            "properties": {
+              "id": {
+                "type": "integer",
+                "format": "int64"
+              }
+            }
+          }
+        ]
+      },
+      "NewJobFamily": {
+        "required": [ "family" ],
+        "properties": {
+          "name": {
+            "type": "string"
+          }
+        }
+      },
+
+
+
+      
+
       "User": {
         "allOf": [
           { "$ref": "#/components/schemas/NewUser" },

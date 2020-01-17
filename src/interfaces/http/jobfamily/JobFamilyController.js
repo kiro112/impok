@@ -13,6 +13,7 @@ const JobFamilyController = {
     router.get('/', inject('getAllJobFamilies'), this.index);
     router.get('/:id', inject('getJobFamily'), this.show);
     router.post('/', inject('createJobFamily'), this.create);
+    router.put('/:id', inject('updateJobFamily'), this.update);
 
     return router;
   },
@@ -86,6 +87,46 @@ const JobFamilyController = {
       .on(ERROR, next);
 
     createJobFamily.execute(req.body);
+  },
+
+  update(req, res, next) {
+    const {
+      updateJobFamily,
+      jobFamilySerializer
+    } = req;
+
+    const {
+      SUCCESS,
+      ERROR,
+      VALIDATION_ERROR,
+      NOT_FOUND
+    } = updateJobFamily.outputs;
+
+    updateJobFamily
+      .on(SUCCESS, fam => {
+        res
+          .status(Status.OK)
+          .json(jobFamilySerializer.serialize(fam));
+      })
+      .on(VALIDATION_ERROR, error => {
+        res
+          .status(Status.BAD_REQUEST)
+          .json({
+            type: 'ValidationError',
+            details: error.details
+          });
+      })
+      .on(NOT_FOUND, error => {
+        res
+          .status(Status.NOT_FOUND)
+          .json({
+            type: 'NotFoundError',
+            details: error.details
+          });
+      })
+      .on(ERROR, next);
+    
+    updateJobFamily.execute(Number(req.params.id), req.body);
   }
 };
 

@@ -8,6 +8,7 @@ const {
   GetAllJobFamilies,
   GetJobFamily,
   CreateJobFamily,
+  UpdateJobFamily
 } = require('./app/jobfamily');
 
 
@@ -28,8 +29,6 @@ const {
   database,
   JobFamily: JobFamilyModel, 
 } = require('./infra/database/models');
-
-
 
 
 const container = createContainer();
@@ -68,7 +67,6 @@ container.register({
 // Database
 container.register({
   database: asValue(database),
-  // UserModel: asValue(UserModel),
   JobFamilyModel: asValue(JobFamilyModel)
 });
 
@@ -77,12 +75,12 @@ container.register({
   getAllJobFamilies: asClass(GetAllJobFamilies),
   getJobFamily: asClass(GetJobFamily),
   createJobFamily: asClass(CreateJobFamily),
+  updateJobFamily: asClass(UpdateJobFamily),
 });
 
 
 // Serializers
 container.register({
-  // userSerializer: asValue(UserSerializer)
   jobFamilySerializer: asValue(JobFamilySerializer)
 });
 

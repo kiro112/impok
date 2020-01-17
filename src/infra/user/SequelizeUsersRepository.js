@@ -45,7 +45,7 @@ class SequelizeUsersRepository {
 
     try {
       const updatedUser = await user.update(newData, { transaction });
-      const userEntity = UserMapper.toEntity(updatedUser);
+      const userEntity = UserMapper.toEntity();
 
       const { valid, errors } = userEntity.validate();
 

@@ -33,6 +33,32 @@ class SequelizeJobFamiliesRepository {
     return JobFamilyMapper.toEntity(new_job_family);
   }
 
+  async update(id, newData) {
+    const job_family = await this._getById(id);
+    const transaction = await this.JobFamilyModel.sequelize.transaction();
+
+    try {
+      const updatedFam = await job_family.update(newData, { transaction });
+      const famEntity = JobFamilyMapper.toEntity(updatedFam);
+
+      const { valid, errors } = famEntity.validate();
+      if(!valid) {
+        const error = new Error('ValidationError');
+        error.details = errors;
+  
+        throw error;
+      }
+
+      await transaction.commit();
+      return famEntity;
+    } catch(error) {
+      await transaction.rollback();
+      throw error;
+    }
+
+  }
+
+
   async remove(id) {
     const job_family = await this._getById(id);
 
