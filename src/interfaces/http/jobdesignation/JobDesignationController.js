@@ -13,6 +13,7 @@ const JobDesignationController = {
     router.get('/', inject('GetAllJobDesignations'), this.index);
     router.get('/:id', inject('GetDesignation'), this.show);
     router.put('/:id', inject('UpdateDesignation'), this.update);
+    router.post('/', inject('CreateDesignation'), this.create);
 
     return router;
   },
@@ -77,7 +78,7 @@ const JobDesignationController = {
       SUCCESS,
       ERROR,
       NOT_FOUND,
-      VALIDATE_ERROR
+      VALIDATION_ERROR
     } = UpdateDesignation.outputs;
   
 
@@ -87,25 +88,56 @@ const JobDesignationController = {
           .status(Status.OK)
           .json(JobDesignationSerializer.serialize(designation));
       })
-    //   .on(VALIDATE_ERROR, error => {
-    //     res
-    //       .status(Status.BAD_REQUEST)
-    //       .json({
-    //         type: error.message,
-    //         details: error.details
-    //       });
-    //   })
-    //   .on(NOT_FOUND, error => {
-    //     res
-    //       .status(Status.NOT_FOUND)
-    //       .json({
-    //         type: error.message,
-    //         details: error.details
-    //       });
-    //   })
+      .on(VALIDATION_ERROR, error => {
+        res
+          .status(Status.BAD_REQUEST)
+          .json({
+            type: error.message,
+            details: error.details
+          });
+      })
+      .on(NOT_FOUND, error => {
+        res
+          .status(Status.NOT_FOUND)
+          .json({
+            type: error.message,
+            details: error.details
+          });
+      })
       .on(ERROR, next);
 
     UpdateDesignation.execute(Number(req.params.id), req.body);
+  },
+
+  create(req, res, next) {
+    const {
+      JobDesignationSerializer,
+      CreateDesignation,
+    } = req;
+
+    const {
+      SUCCESS,
+      ERROR,
+      VALIDATION_ERROR
+    } = CreateDesignation.outputs;
+
+    CreateDesignation
+      .on(SUCCESS, designation => {
+        res
+          .status(Status.OK)
+          .json(JobDesignationSerializer.serialize(designation));
+      })
+      .on(VALIDATION_ERROR, error => {
+        res
+          .status(Status.BAD_REQUEST)
+          .json({
+            type: error.message,
+            details: error.details
+          });
+      })
+      .on(ERROR, next);
+
+    CreateDesignation.execute(req.body);
   }
 };
 
