@@ -15,7 +15,6 @@ class SequelizeJobRoleRepository {
 
   async getById(id) {
     const job_role = await this._getById(id);
-    console.log('job_role', id, job_role);
     return JobRoleMapper.toEntity(job_role);
   }
 

@@ -29,9 +29,18 @@ const {
 } = require('./app/JobRole');
 
 
+const {
+  GetLevel,
+  GetLevels,
+  UpdateLevel,
+  CreateLevel,
+  DeleteLevel,
+} = require('./app/JobLevel');
+
 const JobFamilySerializer = require('./interfaces/http/jobfamily/JobFamilySerializer');
 const JobDesignationSerializer = require('./interfaces/http/jobdesignation/JobDesignationSerializer');
 const JobRoleSerializer = require('./interfaces/http/jobrole/JobRoleSerializer');
+const JobLevelSerializer = require('./interfaces/http/joblevel/JobLevelSerializer');
 
 const Server = require('./interfaces/http/Server');
 const router = require('./interfaces/http/router');
@@ -45,12 +54,14 @@ const SequelizeUsersRepository = require('./infra/user/SequelizeUsersRepository'
 const SequelizeJobFamilyRepository = require('./infra/jobfamily/SequelizeJobFamiliesRepository');
 const SequelizeJobDesignationRepository = require('./infra/jobDesignation/SequelizeJobDesignationRepository');
 const SequelizeJobRoleRepository = require('./infra/JobRole/SequelizeJobRoleRepository');
+const SequelizeJobLevelRepository = require('./infra/JobLevel/SequelizeJobLevelRepository');
 
 const { 
   database,
   JobFamily: JobFamilyModel, 
   JobDesignation: JobDesignationModel,
   JobRole: JobRoleModel,
+  JobLevel: JobLevelModel,
 } = require('./infra/database/models');
 
 
@@ -87,6 +98,7 @@ container.register({
   jobFamilyRepository: asClass(SequelizeJobFamilyRepository).singleton(),
   JobDesignationRepository: asClass(SequelizeJobDesignationRepository).singleton(),
   JobRoleRepository: asClass(SequelizeJobRoleRepository).singleton(),
+  JobLevelRepository: asClass(SequelizeJobLevelRepository).singleton(),
 });
 
 // Database
@@ -95,6 +107,7 @@ container.register({
   JobFamilyModel: asValue(JobFamilyModel),
   JobDesignationModel: asValue(JobDesignationModel),
   JobRoleModel: asValue(JobRoleModel),
+  JobLevelModel: asValue(JobLevelModel),
 });
 
 // Operations
@@ -119,6 +132,13 @@ container.register({
   CreateRole: asClass(CreateRole),
   UpdateRole: asClass(UpdateRole),
   DeleteRole: asClass(DeleteRole),
+
+  // Job Level
+  GetLevels: asClass(GetLevels),
+  GetLevel: asClass(GetLevel),
+  CreateLevel: asClass(CreateLevel),
+  UpdateLevel: asClass(UpdateLevel),
+  DeleteLevel: asClass(DeleteLevel),
 });
 
 
@@ -127,6 +147,7 @@ container.register({
   jobFamilySerializer: asValue(JobFamilySerializer),
   JobDesignationSerializer: asValue(JobDesignationSerializer),
   JobRoleSerializer: asValue(JobRoleSerializer),
+  JobLevelSerializer: asValue(JobLevelSerializer),
 });
 
 module.exports = container;
