@@ -20,9 +20,18 @@ const {
   DeleteDesignation,
 } = require('./app/JobDesignation');
 
+const {
+  GetRoles,
+  GetRole,
+  CreateRole,
+  UpdateRole,
+  DeleteRole,
+} = require('./app/JobRole');
+
 
 const JobFamilySerializer = require('./interfaces/http/jobfamily/JobFamilySerializer');
 const JobDesignationSerializer = require('./interfaces/http/jobdesignation/JobDesignationSerializer');
+const JobRoleSerializer = require('./interfaces/http/jobrole/JobRoleSerializer');
 
 const Server = require('./interfaces/http/Server');
 const router = require('./interfaces/http/router');
@@ -35,11 +44,13 @@ const logger = require('./infra/logging/logger');
 const SequelizeUsersRepository = require('./infra/user/SequelizeUsersRepository');
 const SequelizeJobFamilyRepository = require('./infra/jobfamily/SequelizeJobFamiliesRepository');
 const SequelizeJobDesignationRepository = require('./infra/jobDesignation/SequelizeJobDesignationRepository');
+const SequelizeJobRoleRepository = require('./infra/JobRole/SequelizeJobRoleRepository');
 
 const { 
   database,
   JobFamily: JobFamilyModel, 
   JobDesignation: JobDesignationModel,
+  JobRole: JobRoleModel,
 } = require('./infra/database/models');
 
 
@@ -75,6 +86,7 @@ container.register({
   usersRepository: asClass(SequelizeUsersRepository).singleton(),
   jobFamilyRepository: asClass(SequelizeJobFamilyRepository).singleton(),
   JobDesignationRepository: asClass(SequelizeJobDesignationRepository).singleton(),
+  JobRoleRepository: asClass(SequelizeJobRoleRepository).singleton(),
 });
 
 // Database
@@ -82,6 +94,7 @@ container.register({
   database: asValue(database),
   JobFamilyModel: asValue(JobFamilyModel),
   JobDesignationModel: asValue(JobDesignationModel),
+  JobRoleModel: asValue(JobRoleModel),
 });
 
 // Operations
@@ -99,6 +112,13 @@ container.register({
   CreateDesignation: asClass(CreateDesignation),
   UpdateDesignation: asClass(UpdateDesignation),
   DeleteDesignation: asClass(DeleteDesignation),
+
+  // Job Role
+  GetRoles: asClass(GetRoles),
+  GetRole: asClass(GetRole),
+  CreateRole: asClass(CreateRole),
+  UpdateRole: asClass(UpdateRole),
+  DeleteRole: asClass(DeleteRole),
 });
 
 
@@ -106,6 +126,7 @@ container.register({
 container.register({
   jobFamilySerializer: asValue(JobFamilySerializer),
   JobDesignationSerializer: asValue(JobDesignationSerializer),
+  JobRoleSerializer: asValue(JobRoleSerializer),
 });
 
 module.exports = container;
