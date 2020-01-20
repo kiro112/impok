@@ -56,7 +56,7 @@ class SequelizeJobDesignationRepository {
   }
 
   async remove(id) {
-    const job_designation = this._getById(id);
+    const job_designation = await this._getById(id);
     await job_designation.destroy();
     return;
   }

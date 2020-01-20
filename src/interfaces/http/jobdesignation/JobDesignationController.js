@@ -14,6 +14,7 @@ const JobDesignationController = {
     router.get('/:id', inject('GetDesignation'), this.show);
     router.put('/:id', inject('UpdateDesignation'), this.update);
     router.post('/', inject('CreateDesignation'), this.create);
+    router.delete('/:id', inject('DeleteDesignation'), this.remove);
 
     return router;
   },
@@ -138,6 +139,34 @@ const JobDesignationController = {
       .on(ERROR, next);
 
     CreateDesignation.execute(req.body);
+  },
+
+  remove(req, res, next) {
+    const { DeleteDesignation } = req;
+
+    const {
+      SUCCESS,
+      ERROR,
+      NOT_FOUND
+    } = DeleteDesignation.outputs;
+
+    DeleteDesignation
+      .on(SUCCESS, () => {
+        res
+          .status(Status.OK)
+          .end();
+      })
+      .on(NOT_FOUND, error => {
+        res
+          .status(Status.NOT_FOUND)
+          .json({
+            type: error.message,
+            details: error.details
+          });
+      })
+      .on(ERROR, next);
+
+    DeleteDesignation.execute(Number(req.params.id));
   }
 };
 
