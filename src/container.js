@@ -25,10 +25,12 @@ const swaggerMiddleware = require('./interfaces/http/swagger/swaggerMiddleware')
 const logger = require('./infra/logging/logger');
 const SequelizeUsersRepository = require('./infra/user/SequelizeUsersRepository');
 const SequelizeJobFamilyRepository = require('./infra/jobfamily/SequelizeJobFamiliesRepository');
+const SequelizeJobDesignationRepository = require('./infra/jobDesignation/SequelizeJobDesignationRepository');
 
 const { 
   database,
   JobFamily: JobFamilyModel, 
+  JobDesignation: JobDesignationModel,
 } = require('./infra/database/models');
 
 
@@ -62,13 +64,15 @@ container
 // Repositories
 container.register({
   usersRepository: asClass(SequelizeUsersRepository).singleton(),
-  jobFamilyRepository: asClass(SequelizeJobFamilyRepository).singleton()
+  jobFamilyRepository: asClass(SequelizeJobFamilyRepository).singleton(),
+  jobDesignationRepository: asClass(SequelizeJobDesignationRepository).singleton(),
 });
 
 // Database
 container.register({
   database: asValue(database),
-  JobFamilyModel: asValue(JobFamilyModel)
+  JobFamilyModel: asValue(JobFamilyModel),
+  JobDesignationModel: asValue(JobDesignationModel),
 });
 
 // Operations
