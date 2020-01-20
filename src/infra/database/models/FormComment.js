@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = function(sequelize, DataTypes) {
-  const WorkflowComment = sequelize.define('workflow_comment', {
+  const FormComment = sequelize.define('form_comment', {
     comment: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -11,11 +11,11 @@ module.exports = function(sequelize, DataTypes) {
     classMethods: {
       associate(models) {
         // associations can be defined here
-        WorkflowComment.belongsTo(models.Workflow);
-        WorkflowComment.belongsTo(models.Employee);
+        FormComment.belongsTo(models.Form);
+        FormComment.belongsTo(models.Employee);
       }
     }
   });
 
-  return WorkflowComment;
+  return FormComment;
 };

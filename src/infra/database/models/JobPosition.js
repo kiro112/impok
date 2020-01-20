@@ -11,13 +11,9 @@ module.exports = function(sequelize, DataTypes) {
       associate(models) {
         // associations can be defined here
         JobPosition.belongsTo(models.JobFamily);
-
         JobPosition.belongsTo(models.JobDesignation);
-
         JobPosition.belongsTo(models.JobRole);
-
         JobPosition.belongsTo(models.JobLevel);
-
         JobPosition.belongsTo(models.JobCategory);
 
       }

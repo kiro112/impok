@@ -15,7 +15,7 @@ module.exports = function(sequelize, DataTypes) {
     classMethods: {
       associate(models) {
         // associations can be defined here
-        Activity.belongsTo(models.Workflow);
+        Activity.belongsTo(models.Form);
         Activity.belongsTo(models.Employee);
       }
     }
