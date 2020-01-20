@@ -22,12 +22,12 @@ class UpdateFamily extends Operation {
       this.emit(SUCCESS, family);
     } catch(error) {
       switch(error.message) {
-      case 'ValidationError':
-        return this.emit(VALIDATION_ERROR, error);
-      case 'NotFoundError':
-        return this.emit(NOT_FOUND, error);
-      default:
-        this.emit(ERROR, error);
+        case 'ValidationError':
+          return this.emit(VALIDATION_ERROR, error);
+        case 'NotFoundError':
+          return this.emit(NOT_FOUND, error);
+        default:
+          this.emit(ERROR, error);
       }
     }
   }

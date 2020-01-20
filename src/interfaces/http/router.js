@@ -40,6 +40,7 @@ module.exports = ({ config, containerMiddleware, loggerMiddleware, errorHandler,
 
   // apiRouter.use('/users', controller('user/UsersController'));
   apiRouter.use('/job-families', controller('jobfamily/JobFamilyController'));
+  apiRouter.use('/job-designations', controller('jobdesignation/JobDesignationController'));
 
   router.use('/api', apiRouter);
 

@@ -12,8 +12,17 @@ const {
   DeleteJobFamily
 } = require('./app/jobfamily');
 
+const {
+  GetAllJobDesignations,
+  GetDesignation,
+  CreateDesignation,
+  UpdateDesignation,
+  DeleteDesignation,
+} = require('./app/JobDesignation');
+
 
 const JobFamilySerializer = require('./interfaces/http/jobfamily/JobFamilySerializer');
+const JobDesignationSerializer = require('./interfaces/http/jobdesignation/JobDesignationSerializer');
 
 const Server = require('./interfaces/http/Server');
 const router = require('./interfaces/http/router');
@@ -65,7 +74,7 @@ container
 container.register({
   usersRepository: asClass(SequelizeUsersRepository).singleton(),
   jobFamilyRepository: asClass(SequelizeJobFamilyRepository).singleton(),
-  jobDesignationRepository: asClass(SequelizeJobDesignationRepository).singleton(),
+  JobDesignationRepository: asClass(SequelizeJobDesignationRepository).singleton(),
 });
 
 // Database
@@ -77,17 +86,26 @@ container.register({
 
 // Operations
 container.register({
+  // Job Family
   getAllJobFamilies: asClass(GetAllJobFamilies),
   getJobFamily: asClass(GetJobFamily),
   createJobFamily: asClass(CreateJobFamily),
   updateJobFamily: asClass(UpdateJobFamily),
   deleteJobFamily: asClass(DeleteJobFamily),
+
+  // Job Designation
+  GetAllJobDesignations: asClass(GetAllJobDesignations),
+  GetDesignation: asClass(GetDesignation),
+  CreateDesignation: asClass(CreateDesignation),
+  UpdateDesignation: asClass(UpdateDesignation),
+  DeleteDesignation: asClass(DeleteDesignation),
 });
 
 
 // Serializers
 container.register({
-  jobFamilySerializer: asValue(JobFamilySerializer)
+  jobFamilySerializer: asValue(JobFamilySerializer),
+  JobDesignationSerializer: asValue(JobDesignationSerializer),
 });
 
 module.exports = container;
