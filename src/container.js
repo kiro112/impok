@@ -36,10 +36,20 @@ const {
   DeleteLevel,
 } = require('./app/JobLevel');
 
+const {
+  GetCategories,
+  GetCategory,
+  CreateCategory,
+  UpdateCategory,
+  DeleteCategory,
+} = require('./app/JobCategory');
+
 const JobFamilySerializer = require('./interfaces/http/jobfamily/JobFamilySerializer');
 const JobDesignationSerializer = require('./interfaces/http/jobdesignation/JobDesignationSerializer');
 const JobRoleSerializer = require('./interfaces/http/jobrole/JobRoleSerializer');
 const JobLevelSerializer = require('./interfaces/http/joblevel/JobLevelSerializer');
+const JobCategorySerializer = require('./interfaces/http/jobcategory/JobCategorySerializer');
+
 
 const Server = require('./interfaces/http/Server');
 const router = require('./interfaces/http/router');
@@ -54,6 +64,7 @@ const SequelizeJobFamilyRepository = require('./infra/jobfamily/SequelizeJobFami
 const SequelizeJobDesignationRepository = require('./infra/jobDesignation/SequelizeJobDesignationRepository');
 const SequelizeJobRoleRepository = require('./infra/JobRole/SequelizeJobRoleRepository');
 const SequelizeJobLevelRepository = require('./infra/JobLevel/SequelizeJobLevelRepository');
+const SequelizeJobCategoryRepository = require('./infra/JobCategory/SequelizeJobCategoryRepository');
 
 const { 
   database,
@@ -61,6 +72,7 @@ const {
   JobDesignation: JobDesignationModel,
   JobRole: JobRoleModel,
   JobLevel: JobLevelModel,
+  JobCategory: JobCategoryModel,
 } = require('./infra/database/models');
 
 
@@ -98,6 +110,7 @@ container.register({
   JobDesignationRepository: asClass(SequelizeJobDesignationRepository).singleton(),
   JobRoleRepository: asClass(SequelizeJobRoleRepository).singleton(),
   JobLevelRepository: asClass(SequelizeJobLevelRepository).singleton(),
+  JobCategoryRepository: asClass(SequelizeJobCategoryRepository).singleton(),
 });
 
 // Database
@@ -107,6 +120,7 @@ container.register({
   JobDesignationModel: asValue(JobDesignationModel),
   JobRoleModel: asValue(JobRoleModel),
   JobLevelModel: asValue(JobLevelModel),
+  JobCategoryModel: asValue(JobCategoryModel),
 });
 
 // Operations
@@ -138,6 +152,14 @@ container.register({
   CreateLevel: asClass(CreateLevel),
   UpdateLevel: asClass(UpdateLevel),
   DeleteLevel: asClass(DeleteLevel),
+
+  // Job Category
+  GetCategories: asClass(GetCategories),
+  GetCategory: asClass(GetCategory),
+  CreateCategory: asClass(CreateCategory),
+  UpdateCategory: asClass(UpdateCategory),
+  DeleteCategory: asClass(DeleteCategory),
+
 });
 
 
@@ -147,6 +169,7 @@ container.register({
   JobDesignationSerializer: asValue(JobDesignationSerializer),
   JobRoleSerializer: asValue(JobRoleSerializer),
   JobLevelSerializer: asValue(JobLevelSerializer),
+  JobCategorySerializer: asValue(JobCategorySerializer),
 });
 
 module.exports = container;

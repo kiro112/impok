@@ -42,6 +42,7 @@ module.exports = ({ config, containerMiddleware, loggerMiddleware, errorHandler,
   apiRouter.use('/job-designations', controller('jobdesignation/JobDesignationController'));
   apiRouter.use('/job-roles', controller('jobrole/JobRoleController'));
   apiRouter.use('/job-levels', controller('joblevel/JobLevelController'));
+  apiRouter.use('/job-categories', controller('jobcategory/JobCategoryController'));
 
   router.use('/api', apiRouter);
 

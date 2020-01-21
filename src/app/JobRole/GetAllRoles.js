@@ -23,6 +23,6 @@ class GetAllRoles extends Operation {
   }
 }
 
-Operation.setOutputs(['SUCCESS', 'ERROR']);
+GetAllRoles.setOutputs(['SUCCESS', 'ERROR']);
 
 module.exports = GetAllRoles;
