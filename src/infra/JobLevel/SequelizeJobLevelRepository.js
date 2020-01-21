@@ -26,7 +26,7 @@ class SequelizeJobLevelRepository {
       throw error;
     }
 
-    const new_level = this.JobLevelModel.create(JobLevelMapper.toDatabase(job_level));
+    const new_level = await this.JobLevelModel.create(JobLevelMapper.toDatabase(job_level));
     return JobLevelMapper.toEntity(new_level);
   }
 

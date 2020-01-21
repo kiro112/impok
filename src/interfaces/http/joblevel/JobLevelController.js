@@ -12,6 +12,8 @@ const JobLevelController = {
 
     router.get('/', inject('GetLevels'), this.index);
     router.get('/:id', inject('GetLevel'), this.show);
+    router.post('/', inject('CreateLevel'), this.add);
+
 
     return router;
   },
@@ -67,6 +69,37 @@ const JobLevelController = {
       .on(ERROR, next);
 
     GetLevel.execute(Number(req.params.id));
+  },
+
+  add(req, res, next) {
+    const {
+      CreateLevel,
+      JobLevelSerializer
+    } = req;
+
+    const {
+      SUCCESS,
+      ERROR,
+      VALIDATION_ERROR
+    } = CreateLevel.outputs;
+
+    CreateLevel
+      .on(SUCCESS, level => {
+        res
+          .status(Status.OK)
+          .json(JobLevelSerializer.serialize(level));
+      })
+      .on(VALIDATION_ERROR, error => {
+        res
+          .status(Status.BAD_REQUEST)
+          .json({
+            type: error.message,
+            details: error.details
+          });
+      })
+      .on(ERROR, next);
+    
+    CreateLevel.execute(req.body);
   }
 };
 
