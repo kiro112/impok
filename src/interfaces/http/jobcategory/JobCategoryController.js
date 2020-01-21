@@ -146,7 +146,6 @@ const JobCategoryController = {
   remove(req, res, next) {
     const {
       DeleteCategory,
-      JobCategorySerializer
     } = req;
 
     const {

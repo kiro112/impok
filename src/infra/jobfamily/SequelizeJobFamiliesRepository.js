@@ -49,10 +49,10 @@ class SequelizeJobFamiliesRepository {
         throw error;
       }
 
-      await transaction.commit();
+      transaction.commit();
       return famEntity;
     } catch(error) {
-      await transaction.rollback();
+      transaction.rollback();
       throw error;
     }
 

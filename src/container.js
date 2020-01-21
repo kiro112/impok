@@ -65,6 +65,7 @@ const SequelizeJobDesignationRepository = require('./infra/jobDesignation/Sequel
 const SequelizeJobRoleRepository = require('./infra/JobRole/SequelizeJobRoleRepository');
 const SequelizeJobLevelRepository = require('./infra/JobLevel/SequelizeJobLevelRepository');
 const SequelizeJobCategoryRepository = require('./infra/JobCategory/SequelizeJobCategoryRepository');
+const SequelizeCompetencyGroupRepository = require('./infra/CompetencyGroup/SequelizeCompetencyGroupRepository');
 
 const { 
   database,
@@ -73,6 +74,7 @@ const {
   JobRole: JobRoleModel,
   JobLevel: JobLevelModel,
   JobCategory: JobCategoryModel,
+  CompetencyGroup: CompetencyGroupModel,
 } = require('./infra/database/models');
 
 
@@ -111,6 +113,7 @@ container.register({
   JobRoleRepository: asClass(SequelizeJobRoleRepository).singleton(),
   JobLevelRepository: asClass(SequelizeJobLevelRepository).singleton(),
   JobCategoryRepository: asClass(SequelizeJobCategoryRepository).singleton(),
+  CompetencyGroupRepository: asClass(SequelizeCompetencyGroupRepository).singleton(),
 });
 
 // Database
@@ -121,6 +124,7 @@ container.register({
   JobRoleModel: asValue(JobRoleModel),
   JobLevelModel: asValue(JobLevelModel),
   JobCategoryModel: asValue(JobCategoryModel),
+  CompetencyGroupModel: asValue(CompetencyGroupModel),
 });
 
 // Operations
