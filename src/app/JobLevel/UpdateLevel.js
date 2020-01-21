@@ -6,7 +6,7 @@ class UpdateLevel extends Operation {
 
   constructor({ JobLevelRepository }) {
     super();
-    this.JobLevelRepository = this.JobLevelRepository;
+    this.JobLevelRepository = JobLevelRepository;
   }
 
   async execute(id, data) {
@@ -18,7 +18,7 @@ class UpdateLevel extends Operation {
     } = this.outputs;
 
     try {
-      const level = this.JobLevelRepository.update(id, data);
+      const level = await this.JobLevelRepository.update(id, data);
       this.emit(SUCCESS, level);
     } catch(error) {
       switch(error.message) {

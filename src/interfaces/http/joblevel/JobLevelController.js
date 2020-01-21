@@ -13,7 +13,8 @@ const JobLevelController = {
     router.get('/', inject('GetLevels'), this.index);
     router.get('/:id', inject('GetLevel'), this.show);
     router.post('/', inject('CreateLevel'), this.add);
-
+    router.put('/:id', inject('UpdateLevel'), this.update);
+    router.delete('/:id', inject('DeleteLevel'), this.remove);
 
     return router;
   },
@@ -100,6 +101,76 @@ const JobLevelController = {
       .on(ERROR, next);
     
     CreateLevel.execute(req.body);
+  },
+
+  update(req, res, next) {
+    const {
+      UpdateLevel,
+      JobLevelSerializer
+    } = req;
+
+    const {
+      SUCCESS,
+      ERROR,
+      VALIDATION_ERROR,
+      NOT_FOUND
+    } = UpdateLevel.outputs;
+
+    UpdateLevel
+      .on(SUCCESS, level => {
+        res
+          .status(Status.OK)
+          .json(JobLevelSerializer.serialize(level));
+      })
+      .on(NOT_FOUND, error => {
+        res
+          .status(Status.NOT_FOUND)
+          .json({
+            type: error.message,
+            details: error.details
+          });
+      })
+      .on(VALIDATION_ERROR, error => {
+        res
+          .status(Status.NOT_FOUND)
+          .json({
+            type: error.message,
+            details: error.details
+          });
+      })
+      .on(ERROR, next);
+    
+    UpdateLevel.execute(Number(req.params.id), req.body);
+  },
+
+  remove(req, res, next) {
+    const {
+      DeleteLevel,
+    } = req;
+
+    const {
+      SUCCESS,
+      NOT_FOUND,
+      ERROR
+    } = DeleteLevel.outputs;
+
+    DeleteLevel
+      .on(SUCCESS, () => {
+        res
+          .status(Status.OK)
+          .end();
+      })
+      .on(NOT_FOUND, error => {
+        res
+          .status(Status.OK)
+          .json({
+            type: error.message,
+            details: error.details
+          });
+      })
+      .on(ERROR, next);
+
+    DeleteLevel.execute(Number(req.params.id))
   }
 };
 

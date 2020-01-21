@@ -28,7 +28,6 @@ const {
   DeleteRole,
 } = require('./app/JobRole');
 
-
 const {
   GetLevel,
   GetLevels,

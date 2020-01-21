@@ -5,6 +5,7 @@ const Operation = require('src/app/Operation');
 class DeleteLevel extends Operation {
 
   constructor({ JobLevelRepository }) {
+    super();
     this.JobLevelRepository = JobLevelRepository;
   }
 

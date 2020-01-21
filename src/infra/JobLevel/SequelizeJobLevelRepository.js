@@ -41,7 +41,7 @@ class SequelizeJobLevelRepository {
       const { valid, errors } = jobLevelEntity.validate();
       if(!valid) {
         const error = new Error('ValidateError');
-        error.details = errrors;
+        error.details = errors;
         throw error;
       }
 
