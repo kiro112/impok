@@ -10,6 +10,12 @@ class GetCompetency extends Operation {
   }
 
   async execute(id) {
+    const {
+      SUCCESS,
+      ERROR,
+      NOT_FOUND
+    } = this.outputs;
+
     try {
       const competency = await this.CompetencyRepository.getById(id);
       this.emit(SUCCESS, competency);

@@ -12,6 +12,7 @@ const CompetencyController = {
     router.use(inject('CompetencySerializer'));
 
     router.get('/', inject('GetCompetencies'), this.index);
+    router.get('/:id', inject('GetCompetency'), this.show);
 
     return router;
   },
@@ -36,7 +37,38 @@ const CompetencyController = {
       .on(ERROR, next);
 
     GetCompetencies.execute();
-  }
+  },
+
+  show(req, res, next) {
+    const {
+      GetCompetency,
+      CompetencySerializer
+    } = req;
+
+    const {
+      SUCCESS,
+      ERROR,
+      NOT_FOUND
+    } = GetCompetency.outputs;
+
+    GetCompetency
+      .on(SUCCESS, competency => {
+        res
+          .status(Status.OK)
+          .json(CompetencySerializer.serialize(competency));
+      })
+      .on(NOT_FOUND, error => {
+        res
+          .status(Status.NOT_FOUND)
+          .json({
+            type: error.message,
+            details: error.details
+          });
+      })
+      .on(ERROR, next);
+
+    GetCompetency.execute(Number(req.params.id));
+  },
 
 };
 
