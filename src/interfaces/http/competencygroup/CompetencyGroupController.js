@@ -14,6 +14,7 @@ const CompetencyGroupController = {
     router.get('/', inject('GetCompetencyGroups'), this.index);
     router.get('/:id', inject('GetCompetencyGroup'), this.show);
     router.post('/', inject('CreateCompetencyGroup'), this.add);
+    router.put('/:id', inject('UpdateCompetencyGroup'), this.update);
 
     return router;
   },
@@ -100,6 +101,47 @@ const CompetencyGroupController = {
       .on(ERROR, next);
 
     CreateCompetencyGroup.execute(req.body);
+  },
+
+  update(req, res, next) {
+    const {
+      UpdateCompetencyGroup,
+      CompetencyGroupSerializer
+    } = req;
+
+    const {
+      SUCCESS,
+      ERROR,
+      VALIDATION_ERROR,
+      NOT_FOUND
+    } = UpdateCompetencyGroup.outputs;
+
+    UpdateCompetencyGroup
+      .on(SUCCESS, group => {
+        res
+          .status(Status.OK)
+          .json(CompetencyGroupSerializer.serialize(group));
+      })
+      .on(NOT_FOUND, error => {
+        res
+          .status(Status.NOT_FOUND)
+          .json({
+            type: error.message,
+            details: error.details
+          });
+      })
+      .on(VALIDATION_ERROR, error => {
+        res
+          .status(Status.BAD_REQUEST)
+          .json({
+            type: error.message,
+            details: error.details
+          });
+      })
+      .on(ERROR, next);
+
+    UpdateCompetencyGroup.execute(Number(req.params.id), req.body);
+
   },
 
 };

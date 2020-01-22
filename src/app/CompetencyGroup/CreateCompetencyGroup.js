@@ -20,7 +20,6 @@ class CreateCompetencyGroup extends Operation {
     const competency_group = new CompetencyGroup(data);
     try {
       const new_group = await this.CompetencyGroupRepository.add(competency_group);
-      console.log('new_group', new_group);
       this.emit(SUCCESS, new_group);
     } catch(error) {
       if (error.message === 'ValidationError') {
