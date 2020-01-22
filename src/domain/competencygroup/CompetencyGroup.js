@@ -8,10 +8,7 @@ const CompetencyGroup = attributes({
     type: String,
     required: true
   },
-  description: {
-    type: String,
-    required: false
-  }
+  description: String
 })(
   class CompetencyGroup {}
 );

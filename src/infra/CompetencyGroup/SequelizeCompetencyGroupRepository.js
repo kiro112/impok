@@ -28,7 +28,7 @@ class SequelizeCompetencyGroupRepository {
       throw error;
     }
 
-    const new_competency_group = await this.CompetencyGroupModel.create(competency_group);
+    const new_competency_group = await this.CompetencyGroupModel.create(CompetencyGroupMapper.toDatabase(competency_group));
     return CompetencyGroupMapper.toEntity(new_competency_group);
   }
 

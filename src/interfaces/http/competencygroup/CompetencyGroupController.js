@@ -13,6 +13,7 @@ const CompetencyGroupController = {
     
     router.get('/', inject('GetCompetencyGroups'), this.index);
     router.get('/:id', inject('GetCompetencyGroup'), this.show);
+    router.post('/', inject('CreateCompetencyGroup'), this.add);
 
     return router;
   },
@@ -68,6 +69,37 @@ const CompetencyGroupController = {
       .on(ERROR, next);
 
     GetCompetencyGroup.execute(Number(req.params.id));
+  },
+
+  add(req, res, next) {
+    const {
+      CreateCompetencyGroup,
+      CompetencyGroupSerializer
+    } = req;
+
+    const {
+      SUCCESS,
+      ERROR,
+      VALIDATION_ERROR
+    } = CreateCompetencyGroup.outputs;
+
+    CreateCompetencyGroup
+      .on(SUCCESS, group => {
+        res
+          .status(Status.OK)
+          .json(CompetencyGroupSerializer.serialize(group));
+      })
+      .on(VALIDATION_ERROR, error => {
+        res
+          .status(Status.BAD_REQUEST)
+          .json({
+            type: error.message,
+            details: error.details
+          });
+      })
+      .on(ERROR, next);
+
+    CreateCompetencyGroup.execute(req.body);
   },
 
 };
