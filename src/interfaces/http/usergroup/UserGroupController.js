@@ -14,6 +14,7 @@ const UserGroupController = {
 
     router.get('/', inject('GetUserGroups'), this.index);
     router.get('/:id', inject('GetUserGroup'), this.show);
+    router.post('/', inject('CreateUserGroup'), this.add);
 
     return router;
   },
@@ -69,8 +70,38 @@ const UserGroupController = {
       .on(ERROR, next);
 
     GetUserGroup.execute(Number(req.params.id));
-  }
+  },
   
+  add(req, res, next) {
+    const {
+      CreateUserGroup,
+      UserGroupSerializer
+    } = req;
+
+    const {
+      SUCCESS,
+      ERROR,
+      VALIDATION_ERROR
+    } = CreateUserGroup.outputs;
+
+    CreateUserGroup
+      .on(SUCCESS, user_group => {
+        res
+          .status(Status.OK)
+          .json(UserGroupSerializer.serialize(user_group));
+      })
+      .on(VALIDATION_ERROR, error => {
+        res
+          .status(Status.BAD_REQUEST)
+          .json({
+            type: error.message,
+            details: error.details
+          });
+      })
+      .on(ERROR, next);
+
+    CreateUserGroup.execute(req.body);
+  }
 
 };
 
