@@ -17,7 +17,7 @@ class GetProject extends Operation {
     } = this.outputs;
 
     try {
-      const project = this.ProjectRepository.getById(id);
+      const project = await this.ProjectRepository.getById(id);
       this.emit(SUCCESS, project);
     } catch(error) {
       if (error.message === 'NotFoundError') {
