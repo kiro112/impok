@@ -44,12 +44,20 @@ const {
   DeleteCategory,
 } = require('./app/JobCategory');
 
+const {
+  GetCompetencyGroup,
+  GetCompetencyGroups,
+  CreateCompetencyGroup,
+  UpdateCompetencyGroup,
+  DeleteCompetencyGroup,
+} = require('./app/CompetencyGroup');
+
 const JobFamilySerializer = require('./interfaces/http/jobfamily/JobFamilySerializer');
 const JobDesignationSerializer = require('./interfaces/http/jobdesignation/JobDesignationSerializer');
 const JobRoleSerializer = require('./interfaces/http/jobrole/JobRoleSerializer');
 const JobLevelSerializer = require('./interfaces/http/joblevel/JobLevelSerializer');
 const JobCategorySerializer = require('./interfaces/http/jobcategory/JobCategorySerializer');
-
+const CompetencyGroupSerializer = require('./interfaces/http/competencygroup/CompetencyGroupSerializer');
 
 const Server = require('./interfaces/http/Server');
 const router = require('./interfaces/http/router');
@@ -164,6 +172,13 @@ container.register({
   UpdateCategory: asClass(UpdateCategory),
   DeleteCategory: asClass(DeleteCategory),
 
+  // Competency Group
+  GetCompetencyGroups: asClass(GetCompetencyGroups),
+  GetCompetencyGroup: asClass(GetCompetencyGroup),
+  CreateCompetencyGroup: asClass(CreateCompetencyGroup),
+  UpdateCompetencyGroup: asClass(UpdateCompetencyGroup),
+  DeleteCompetencyGroup: asClass(DeleteCompetencyGroup),
+
 });
 
 
@@ -174,6 +189,7 @@ container.register({
   JobRoleSerializer: asValue(JobRoleSerializer),
   JobLevelSerializer: asValue(JobLevelSerializer),
   JobCategorySerializer: asValue(JobCategorySerializer),
+  CompetencyGroupSerializer: asValue(CompetencyGroupSerializer),
 });
 
 module.exports = container;
