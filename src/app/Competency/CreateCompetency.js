@@ -19,7 +19,7 @@ class CreateCompetency extends Operation {
 
     const competency = new Competency(data);
     try {
-      const newCompetency = await this.CompetencyRepository.create(competency);
+      const newCompetency = await this.CompetencyRepository.add(competency);
       this.emit(SUCCESS, newCompetency);
     } catch(error) {
       if(error.message === 'ValidationError') {

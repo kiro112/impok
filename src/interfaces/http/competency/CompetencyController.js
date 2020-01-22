@@ -14,6 +14,7 @@ const CompetencyController = {
     router.get('/', inject('GetCompetencies'), this.index);
     router.get('/:id', inject('GetCompetency'), this.show);
     router.put('/:id', inject('UpdateCompetency'), this.update);
+    router.post('/', inject('CreateCompetency'), this.add);
 
     return router;
   },
@@ -109,6 +110,37 @@ const CompetencyController = {
       .on(ERROR, next);
     
     UpdateCompetency.execute(Number(req.params.id), req.body);
+  },
+
+  add(req, res, next) {
+    const {
+      CreateCompetency,
+      CompetencySerializer
+    } = req;
+
+    const {
+      SUCCESS,
+      ERROR,
+      VALIDATION_ERROR
+    } = CreateCompetency.outputs;
+
+    CreateCompetency
+      .on(SUCCESS, competency => {
+        res
+          .status(Status.OK)
+          .json(CompetencySerializer.serialize(competency));
+      })
+      .on(VALIDATION_ERROR, error => {
+        res
+          .status(Status.BAD_REQUEST)
+          .json({
+            type: error.message,
+            details: error.details
+          });
+      })
+      .on(ERROR, next);
+
+    CreateCompetency.execute(req.body);
   }
 
 };
