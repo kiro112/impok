@@ -147,7 +147,6 @@ const CompetencyController = {
   remove(req, res, next) {
     const {
       DeleteCompetency,
-      CompetencySerializer
     } = req;
 
     const {
