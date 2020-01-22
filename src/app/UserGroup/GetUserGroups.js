@@ -16,7 +16,7 @@ class GetUserGroups extends Operation {
     } = this.outputs;
 
     try {
-      const user_groups = this.UserGroupRepository.getAll({
+      const user_groups = await this.UserGroupRepository.getAll({
         attributes: [
           'id', 'name'
         ]

@@ -45,6 +45,8 @@ module.exports = ({ config, containerMiddleware, loggerMiddleware, errorHandler,
   apiRouter.use('/job-categories', controller('jobcategory/JobCategoryController'));
   apiRouter.use('/competency-groups', controller('competencygroup/CompetencyGroupController'));
   apiRouter.use('/competencies', controller('competency/CompetencyController'));
+  apiRouter.use('/user-groups', controller('usergroup/UserGroupController'));
+
 
   router.use('/api', apiRouter);
 
