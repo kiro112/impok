@@ -66,6 +66,7 @@ const JobRoleSerializer = require('./interfaces/http/jobrole/JobRoleSerializer')
 const JobLevelSerializer = require('./interfaces/http/joblevel/JobLevelSerializer');
 const JobCategorySerializer = require('./interfaces/http/jobcategory/JobCategorySerializer');
 const CompetencyGroupSerializer = require('./interfaces/http/competencygroup/CompetencyGroupSerializer');
+const CompetencySerializer = require('./interfaces/http/competency/CompetencySerializer');
 
 const Server = require('./interfaces/http/Server');
 const router = require('./interfaces/http/router');
@@ -209,6 +210,7 @@ container.register({
   JobLevelSerializer: asValue(JobLevelSerializer),
   JobCategorySerializer: asValue(JobCategorySerializer),
   CompetencyGroupSerializer: asValue(CompetencyGroupSerializer),
+  CompetencySerializer: asValue(CompetencySerializer),
 });
 
 module.exports = container;

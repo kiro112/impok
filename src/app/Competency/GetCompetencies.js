@@ -10,6 +10,12 @@ class GetCompetencies extends Operation {
   }
 
   async execute() {
+    const {
+      SUCCESS,
+      ERROR,
+      NOT_FOUND
+    } = this.outputs;
+
     try {
       const competencies = await this.CompetencyRepository.getAll({
         attributes: ['id', 'description', 'competency_group_id']
@@ -17,6 +23,9 @@ class GetCompetencies extends Operation {
 
       this.emit(SUCCESS, competencies);
     } catch(error) {
+      if(error.message === 'NotFoundError') {
+        return this.emit(NOT_FOUND, error);
+      }
       this.emit(ERROR, error);
     }
   }
@@ -25,6 +34,7 @@ class GetCompetencies extends Operation {
 
 GetCompetencies.setOutputs([
   'SUCCESS',
+  'NOT_FOUND',
   'ERROR'
 ]);
 
