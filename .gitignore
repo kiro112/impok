@@ -23,3 +23,7 @@ coverage/
 
 # IDE files
 .idea/
+
+
+# VS Code
+.vscode
