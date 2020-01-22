@@ -42,7 +42,7 @@ class SequelizeJobCategoryRepository {
 
       const { valid, errors } = jobCategoryEntity.validate();
       if (!valid) {
-        const error = new Error('ValidateError');
+        const error = new Error('ValidationError');
         error.details = errors;
         throw error;
       }
