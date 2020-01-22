@@ -60,6 +60,14 @@ const {
   DeleteCompetency,
 } = require('./app/Competency');
 
+const {
+  GetUserGroups,
+  GetUserGroup,
+  CreateUserGroup,
+  UpdateUserGroup,
+  DeleteUserGroup,
+} = require('./app/UserGroup');
+
 const JobFamilySerializer = require('./interfaces/http/jobfamily/JobFamilySerializer');
 const JobDesignationSerializer = require('./interfaces/http/jobdesignation/JobDesignationSerializer');
 const JobRoleSerializer = require('./interfaces/http/jobrole/JobRoleSerializer');
@@ -149,6 +157,7 @@ container.register({
   JobCategoryModel: asValue(JobCategoryModel),
   CompetencyGroupModel: asValue(CompetencyGroupModel),
   CompetencyModel: asValue(CompetencyModel),
+  UserGroupModel: asValue(UserGroupModel),
 });
 
 // Operations
@@ -201,6 +210,13 @@ container.register({
   CreateCompetency: asClass(CreateCompetency),
   UpdateCompetency: asClass(UpdateCompetency),
   DeleteCompetency: asClass(DeleteCompetency),
+
+  // User Group
+  GetUserGroups: asClass(GetUserGroups),
+  GetUserGroup: asClass(GetUserGroups),
+  CreateUserGroup: asClass(CreateUserGroup),
+  UpdateUserGroup: asClass(UpdateUserGroup),
+  DeleteUserGroup: asClass(DeleteUserGroup),
 
 });
 
