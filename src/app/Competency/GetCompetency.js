@@ -18,6 +18,7 @@ class GetCompetency extends Operation {
 
     try {
       const competency = await this.CompetencyRepository.getById(id);
+
       this.emit(SUCCESS, competency);
     } catch(error) {
       if(error.message === 'NotFoundError') {

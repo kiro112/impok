@@ -8,7 +8,7 @@ const Competency = attributes({
     type: String,
     required: true
   },
-  competecy_group_id: {
+  competency_group_id: {
     type: Number,
     required: true
   },

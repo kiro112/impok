@@ -66,7 +66,12 @@ class SequelizeJobDesignationRepository {
   // private
   async _getById(id) {
     try {
-      return await this.JobDesignationModel.findByPk(id, { rejectOnEmpty: true });
+      return await this.JobDesignationModel.findByPk(id, { 
+        rejectOnEmpty: true,
+        attributes: {
+          include: ['job_family_id']
+        } 
+      });
     } catch(error) {
       if (error.name === 'SequelizeEmptyResultError') {
         const notFoundError = new Error('NotFoundError');

@@ -64,7 +64,13 @@ class SequelizeCompetencyRepository {
   // private
   async _getById(id) {
     try {
-      const competency = await this.CompetencyModel.findByPk(id, { rejectOnEmpty: true });
+      const competency = await this.CompetencyModel.findByPk(id, { 
+        rejectOnEmpty: true,
+        attributes: {
+          include: ['competency_group_id']
+        }
+      });
+
       return competency;
     } catch(error) {
       if (error.name === 'SequelizeEmptyResultError') {
