@@ -37,7 +37,7 @@ class UserGroupRepository {
 
   async update(id, newData) {
     const user_group = await this._getById(id);
-    const transaction = this.UserGroupModel.sequelize.transaction();
+    const transaction = await this.UserGroupModel.sequelize.transaction();
 
     try {
       const updated = await user_group.update(newData);

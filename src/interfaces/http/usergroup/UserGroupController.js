@@ -15,6 +15,7 @@ const UserGroupController = {
     router.get('/', inject('GetUserGroups'), this.index);
     router.get('/:id', inject('GetUserGroup'), this.show);
     router.post('/', inject('CreateUserGroup'), this.add);
+    router.put('/:id', inject('UpdateUserGroup'), this.update);
 
     return router;
   },
@@ -101,6 +102,46 @@ const UserGroupController = {
       .on(ERROR, next);
 
     CreateUserGroup.execute(req.body);
+  },
+
+  update(req, res, next) {
+    const {
+      UpdateUserGroup,
+      UserGroupSerializer
+    } = req;
+
+    const {
+      SUCCESS,
+      ERROR,
+      NOT_FOUND,
+      VALIDATION_ERROR
+    } = UpdateUserGroup.outputs;
+
+    UpdateUserGroup
+      .on(SUCCESS, user_group => {
+        res
+          .status(Status.OK)
+          .json(UserGroupSerializer.serialize(user_group));
+      })
+      .on(NOT_FOUND, error => {
+        res
+          .status(Status.NOT_FOUND)
+          .json({
+            type: error.message,
+            details: error.details
+          });
+      })
+      .on(VALIDATION_ERROR, error => {
+        res
+          .status(Status.OK)
+          .json({
+            type: error.message,
+            details: error.details
+          });
+      })
+      .on(ERROR, next);
+
+    UpdateUserGroup.execute(Number(req.params.id), req.body);
   }
 
 };
