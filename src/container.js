@@ -68,6 +68,14 @@ const {
   DeleteUserGroup,
 } = require('./app/UserGroup');
 
+const {
+  GetProjects,
+  GetProject,
+  CreateProject,
+  UpdateProject,
+  DeleteProject,
+} = require('./app/Project');
+
 const JobFamilySerializer = require('./interfaces/http/jobfamily/JobFamilySerializer');
 const JobDesignationSerializer = require('./interfaces/http/jobdesignation/JobDesignationSerializer');
 const JobRoleSerializer = require('./interfaces/http/jobrole/JobRoleSerializer');
@@ -94,6 +102,7 @@ const SequelizeJobCategoryRepository = require('./infra/JobCategory/SequelizeJob
 const SequelizeCompetencyGroupRepository = require('./infra/CompetencyGroup/SequelizeCompetencyGroupRepository');
 const SequelizeCompetencyRepository = require('./infra/Competency/SequelizeCompetencyRepository');
 const SequelizeUserGroupRepository = require('./infra/UserGroup/UserGroupRepository');
+const SequelizeProjectRepository = require('./infra/Project/ProjectRepository');
 
 const { 
   database,
@@ -105,6 +114,7 @@ const {
   CompetencyGroup: CompetencyGroupModel,
   Competency: CompetencyModel,
   UserGroup: UserGroupModel,
+  Project: ProjectModel,
 } = require('./infra/database/models');
 
 
@@ -146,6 +156,7 @@ container.register({
   CompetencyGroupRepository: asClass(SequelizeCompetencyGroupRepository).singleton(),
   CompetencyRepository: asClass(SequelizeCompetencyRepository).singleton(),
   UserGroupRepository: asClass(SequelizeUserGroupRepository).singleton(),
+  ProjectRepository: asClass(SequelizeProjectRepository).singleton(),
 });
 
 // Database
@@ -159,6 +170,7 @@ container.register({
   CompetencyGroupModel: asValue(CompetencyGroupModel),
   CompetencyModel: asValue(CompetencyModel),
   UserGroupModel: asValue(UserGroupModel),
+  ProjectModel: asValue(ProjectModel),
 });
 
 // Operations
@@ -218,6 +230,13 @@ container.register({
   CreateUserGroup: asClass(CreateUserGroup),
   UpdateUserGroup: asClass(UpdateUserGroup),
   DeleteUserGroup: asClass(DeleteUserGroup),
+
+  // Project
+  GetProjects: asClass(GetProjects),
+  GetProject: asClass(GetProject),
+  CreateProject: asClass(CreateProject),
+  UpdateProject: asClass(UpdateProject),
+  DeleteProject: asClass(DeleteProject),
 
 });
 
