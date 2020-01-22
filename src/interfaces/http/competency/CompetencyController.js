@@ -15,6 +15,7 @@ const CompetencyController = {
     router.get('/:id', inject('GetCompetency'), this.show);
     router.put('/:id', inject('UpdateCompetency'), this.update);
     router.post('/', inject('CreateCompetency'), this.add);
+    router.delete('/:id', inject('DeleteCompetency'), this.remove);
 
     return router;
   },
@@ -141,6 +142,37 @@ const CompetencyController = {
       .on(ERROR, next);
 
     CreateCompetency.execute(req.body);
+  },
+
+  remove(req, res, next) {
+    const {
+      DeleteCompetency,
+      CompetencySerializer
+    } = req;
+
+    const {
+      SUCCESS,
+      ERROR,
+      NOT_FOUND
+    } = DeleteCompetency.outputs;
+
+    DeleteCompetency
+      .on(SUCCESS, () => {
+        res
+          .status(Status.OK)
+          .end();
+      })
+      .on(NOT_FOUND, error => {
+        res
+          .status(Status.NOT_FOUND)
+          .json({
+            type: error.message,
+            details: error.details
+          });
+      })
+      .on(ERROR, next);
+
+    DeleteCompetency.execute(Number(req.params.id));
   }
 
 };
