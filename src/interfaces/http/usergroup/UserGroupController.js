@@ -16,6 +16,7 @@ const UserGroupController = {
     router.get('/:id', inject('GetUserGroup'), this.show);
     router.post('/', inject('CreateUserGroup'), this.add);
     router.put('/:id', inject('UpdateUserGroup'), this.update);
+    router.delete('/:id', inject('DeleteUserGroup'), this.remove);
 
     return router;
   },
@@ -142,6 +143,36 @@ const UserGroupController = {
       .on(ERROR, next);
 
     UpdateUserGroup.execute(Number(req.params.id), req.body);
+  },
+
+  remove(req, res, next) {
+    const {
+      DeleteUserGroup,
+    } = req;
+
+    const {
+      SUCCESS,
+      ERROR,
+      NOT_FOUND
+    } = DeleteUserGroup.outputs;
+
+    DeleteUserGroup
+      .on(SUCCESS, () => {
+        res
+          .status(Status.OK)
+          .end();
+      })
+      .on(NOT_FOUND, error => {
+        res
+          .status(Status.NOT_FOUND)
+          .json({
+            type: error.message,
+            details: error
+          });
+      })
+      .on(ERROR, next);
+
+    DeleteUserGroup.execute(Number(req.params.id));
   }
 
 };
