@@ -13,6 +13,7 @@ const UserGroupController = {
     router.use(inject('UserGroupSerializer'));
 
     router.get('/', inject('GetUserGroups'), this.index);
+    router.get('/:id', inject('GetUserGroup'), this.show);
 
     return router;
   },
@@ -38,6 +39,37 @@ const UserGroupController = {
     
     GetUserGroups.execute();
   },
+
+  show(req, res, next) {
+    const {
+      GetUserGroup,
+      UserGroupSerializer
+    } = req;
+
+    const {
+      SUCCESS,
+      ERROR,
+      NOT_FOUND
+    } = GetUserGroup.outputs;
+
+    GetUserGroup
+      .on(SUCCESS, user_group => {
+        res
+          .status(Status.OK)
+          .json(UserGroupSerializer.serialize(user_group));
+      })
+      .on(NOT_FOUND, error => {
+        res
+          .status(Status.NOT_FOUND)
+          .json({
+            type: error.message,
+            details: error.details
+          });
+      })
+      .on(ERROR, next);
+
+    GetUserGroup.execute(Number(req.params.id));
+  }
   
 
 };

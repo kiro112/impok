@@ -214,7 +214,7 @@ container.register({
 
   // User Group
   GetUserGroups: asClass(GetUserGroups),
-  GetUserGroup: asClass(GetUserGroups),
+  GetUserGroup: asClass(GetUserGroup),
   CreateUserGroup: asClass(CreateUserGroup),
   UpdateUserGroup: asClass(UpdateUserGroup),
   DeleteUserGroup: asClass(DeleteUserGroup),

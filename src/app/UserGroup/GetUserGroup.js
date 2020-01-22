@@ -17,7 +17,7 @@ class GetUserGroup extends Operation {
     } = this.outputs;
 
     try {
-      const userGroup = this.UserGroupRepository.getById(id);
+      const userGroup = await this.UserGroupRepository.getById(id);
       this.emit(SUCCESS, userGroup);
     } catch(error) {
       if(error.message === 'NotFoundError') {
