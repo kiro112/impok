@@ -1,6 +1,6 @@
 'use strict';
 
-const Operation = require('Operation');
+const Operation = require('src/app/Operation');
 
 class DeleteProject extends Operation {
 

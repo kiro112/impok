@@ -16,7 +16,7 @@ class GetProjects extends Operation {
     } = this.outputs;
 
     try {
-      const projects = this.ProjectRepository.getAll({
+      const projects = await this.ProjectRepository.getAll({
         attributes: [
           'id', 'project'
         ]
