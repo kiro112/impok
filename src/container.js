@@ -52,6 +52,14 @@ const {
   DeleteCompetencyGroup,
 } = require('./app/CompetencyGroup');
 
+const {
+  GetCompetencies,
+  GetCompetency,
+  CreateCompetency,
+  UpdateCompetency,
+  DeleteCompetency,
+} = require('./app/Competency');
+
 const JobFamilySerializer = require('./interfaces/http/jobfamily/JobFamilySerializer');
 const JobDesignationSerializer = require('./interfaces/http/jobdesignation/JobDesignationSerializer');
 const JobRoleSerializer = require('./interfaces/http/jobrole/JobRoleSerializer');
@@ -182,6 +190,13 @@ container.register({
   CreateCompetencyGroup: asClass(CreateCompetencyGroup),
   UpdateCompetencyGroup: asClass(UpdateCompetencyGroup),
   DeleteCompetencyGroup: asClass(DeleteCompetencyGroup),
+
+  // Competency
+  GetCompetencies: asClass(GetCompetencies),
+  GetCompetency: asClass(GetCompetency),
+  CreateCompetency: asClass(CreateCompetency),
+  UpdateCompetency: asClass(UpdateCompetency),
+  DeleteCompetency: asClass(DeleteCompetency),
 
 });
 
