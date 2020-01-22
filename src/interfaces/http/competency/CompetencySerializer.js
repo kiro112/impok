@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = {
-  serializer({
+  serialize({
     id,
     name,
     description,

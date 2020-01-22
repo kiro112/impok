@@ -13,19 +13,16 @@ class GetCompetencies extends Operation {
     const {
       SUCCESS,
       ERROR,
-      NOT_FOUND
     } = this.outputs;
 
     try {
       const competencies = await this.CompetencyRepository.getAll({
-        attributes: ['id', 'description', 'competency_group_id']
+        attributes: ['id', 'name', 'description', 'competency_group_id']
       });
 
       this.emit(SUCCESS, competencies);
+
     } catch(error) {
-      if(error.message === 'NotFoundError') {
-        return this.emit(NOT_FOUND, error);
-      }
       this.emit(ERROR, error);
     }
   }
@@ -34,7 +31,6 @@ class GetCompetencies extends Operation {
 
 GetCompetencies.setOutputs([
   'SUCCESS',
-  'NOT_FOUND',
   'ERROR'
 ]);
 
