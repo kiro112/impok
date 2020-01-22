@@ -15,6 +15,7 @@ const CompetencyGroupController = {
     router.get('/:id', inject('GetCompetencyGroup'), this.show);
     router.post('/', inject('CreateCompetencyGroup'), this.add);
     router.put('/:id', inject('UpdateCompetencyGroup'), this.update);
+    router.delete('/:id', inject('DeleteCompetencyGroup'), this.remove);
 
     return router;
   },
@@ -144,6 +145,35 @@ const CompetencyGroupController = {
 
   },
 
+  remove(req, res, next) {
+    const {
+      DeleteCompetencyGroup,
+    } = req;
+
+    const {
+      SUCCESS,
+      NOT_FOUND,
+      ERROR
+    } = DeleteCompetencyGroup.outputs;
+
+    DeleteCompetencyGroup
+      .on(SUCCESS, () => {
+        res
+          .status(Status.OK)
+          .end();
+      })
+      .on(NOT_FOUND, error => {
+        res
+          .status(Status.NOT_FOUND)
+          .json({
+            type: error.message,
+            details: error.details
+          });
+      })
+      .on(ERROR, next);
+    
+      DeleteCompetencyGroup.execute(Number(req.params.id));
+  }
 };
 
 module.exports = CompetencyGroupController;
