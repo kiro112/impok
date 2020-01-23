@@ -6,7 +6,7 @@ module.exports = {
     const loaded = {};
 
     sequelize.sync({
-      force: false
+      force: true
     });
   
     fs

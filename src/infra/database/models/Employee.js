@@ -6,15 +6,12 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: false,
     }
-  }, {
-    classMethods: {
-      associate(models) {
-        // associations can be defined here
-        Employee.belongsTo(models.JobPosition);
-        Employee.belongsTo(models.UserGroup);
-      }
-    }
   });
+
+  Employee.associate = models => {
+    Employee.belongsTo(models.JobPosition);
+    Employee.belongsTo(models.UserGroup);
+  };
 
   return Employee;
 };

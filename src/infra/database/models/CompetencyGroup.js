@@ -7,14 +7,11 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
     },
     description: DataTypes.STRING
-  }, {
-    classMethods: {
-      associate(models) {
-        // associations can be defined here
-        CompetencyGroup.hasMany(models.Competency);
-      }
-    }
   });
+
+  CompetencyGroup.associate = models => {
+    CompetencyGroup.hasMany(models.Competency);
+  };
 
   return CompetencyGroup;
 };

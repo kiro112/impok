@@ -11,15 +11,12 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
     },
     timestamp: DataTypes.DATE
-  }, {
-    classMethods: {
-      associate(models) {
-        // associations can be defined here
-        Activity.belongsTo(models.Form);
-        Activity.belongsTo(models.Employee);
-      }
-    }
   });
+
+  Activity.associate = models => {
+    Activity.belongsTo(models.Form);
+    Activity.belongsTo(models.Employee);
+  }
 
   return Activity;
 };

@@ -6,15 +6,12 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: false,
     },
-  }, {
-    classMethods: {
-      associate(models) {
-        // associations can be defined here
-        FormTemplate.belongsTo(models.FormType);
-        FormTemplate.belongsTo(models.JobPosition);
-      }
-    }
   });
+
+  FormTemplate.associate = models => {
+    FormTemplate.belongsTo(models.FormType);
+    FormTemplate.belongsTo(models.JobPosition);
+  };
 
   return FormTemplate;
 };

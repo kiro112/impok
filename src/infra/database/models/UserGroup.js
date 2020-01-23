@@ -6,12 +6,6 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: false,
     }
-  }, {
-    classMethods: {
-      associate() {
-        // associations can be defined here
-      }
-    }
   });
 
   return UserGroup;

@@ -6,19 +6,15 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: false,
     }
-  }, {
-    classMethods: {
-      associate(models) {
-        // associations can be defined here
-        JobPosition.belongsTo(models.JobFamily);
-        JobPosition.belongsTo(models.JobDesignation);
-        JobPosition.belongsTo(models.JobRole);
-        JobPosition.belongsTo(models.JobLevel);
-        JobPosition.belongsTo(models.JobCategory);
-
-      }
-    }
   });
+
+  JobPosition.associate = models => {
+    JobPosition.belongsTo(models.JobFamily);
+    JobPosition.belongsTo(models.JobDesignation);
+    JobPosition.belongsTo(models.JobRole);
+    JobPosition.belongsTo(models.JobLevel);
+    JobPosition.belongsTo(models.JobCategory);
+  };
 
   return JobPosition;
 };

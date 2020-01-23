@@ -28,18 +28,15 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
       defaultValue: 0
     }
-  }, {
-    classMethods: {
-      associate(models) {
-        // associations can be defined here
-        Form.belongsTo(models.FormTemplate);
-        Form.belongsTo(models.Employee);
-        Form.belongsTo(models.Employee, {
-          foreignKey: 'manager_id'
-        });
-      }
-    }
   });
+
+  Form.associate = models => {
+    Form.belongsTo(models.FormTemplate);
+    Form.belongsTo(models.Employee);
+    Form.belongsTo(models.Employee, {
+      foreignKey: 'manager_id'
+    });
+  };
 
   return Form;
 };

@@ -30,15 +30,12 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.INTEGER.UNSIGNED,
       allowNull: false
     }
-  }, {
-    classMethods: {
-      associate(models) {
-        // associations can be defined here
-        FormCompetency.belongsTo(models.FormCompetencyGroup);
-        FormCompetency.belongsTo(models.Competency);
-      }
-    }
   });
+
+  FormCompetency.associate = models => {
+    FormCompetency.belongsTo(models.FormCompetencyGroup);
+    FormCompetency.belongsTo(models.Competency);
+  };
 
   return FormCompetency;
 };

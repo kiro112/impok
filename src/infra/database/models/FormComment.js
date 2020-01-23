@@ -7,15 +7,12 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
     },
     timestamp: DataTypes.DATE
-  }, {
-    classMethods: {
-      associate(models) {
-        // associations can be defined here
-        FormComment.belongsTo(models.Form);
-        FormComment.belongsTo(models.Employee);
-      }
-    }
   });
+
+  FormComment.associate = models => {
+    FormComment.belongsTo(models.Form);
+    FormComment.belongsTo(models.Employee);
+  };
 
   return FormComment;
 };

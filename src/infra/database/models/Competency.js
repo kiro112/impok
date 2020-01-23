@@ -7,12 +7,6 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
     },
     description: DataTypes.STRING
-  }, {
-    classMethods: {
-      associate() {
-        // associations can be defined here
-      }
-    }
   });
 
   return Competency;

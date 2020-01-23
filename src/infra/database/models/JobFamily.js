@@ -6,16 +6,11 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: false,
     }
-  }, {
-    classMethods: {
-      associate(models) {
-        // associations can be defined here
-        JobFamily.hasMany(models.JobDesignation, {
-          foreignKey: 'job_family_id'
-        });
-      }
-    }
   });
+
+  JobFamily.associate = models => {
+    JobFamily.hasMany(models.JobDesignation);
+  };
 
   return JobFamily;
 };

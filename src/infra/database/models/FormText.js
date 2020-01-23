@@ -11,14 +11,11 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.INTEGER.UNSIGNED,
       allowNull: false
     }
-  }, {
-    classMethods: {
-      associate(models) {
-        // associations can be defined here
-        FormText.belongsTo(models.FormCompetencyGroup);
-      }
-    }
   });
+
+  FormText.associate = models => {
+    FormText.belongsTo(models.FormCompetencyGroup);
+  };
 
   return FormText;
 };

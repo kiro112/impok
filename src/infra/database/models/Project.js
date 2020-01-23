@@ -6,14 +6,11 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: false,
     }
-  }, {
-    classMethods: {
-      associate(models) {
-        // associations can be defined here
-        Project.hasMany(models.EmployeeProject);
-      }
-    }
   });
+
+  Project.associate = models => {
+    Project.hasMany(models.EmployeeProject);
+  };
 
   return Project;
 };
