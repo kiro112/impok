@@ -19,7 +19,7 @@ class CreateProject extends Operation {
 
     const project = new Project(data);
     try {
-      const new_project = this.ProjectRepository.add(project);
+      const new_project = await this.ProjectRepository.add(project);
       this.emit(SUCCESS, new_project);
     } catch(error) {
       if(error.message === 'ValidationError') {
