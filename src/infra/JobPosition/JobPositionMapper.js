@@ -38,11 +38,11 @@ module.exports = {
 
     return {
       job_title,
-      job_family_id,
-      job_designation_id,
-      job_role_id,
-      job_level_id,
-      job_category_id
+      jobFamilyId: job_family_id,
+      jobDesignationId: job_designation_id,
+      jobRoleId: job_role_id,
+      jobLevelId: job_level_id,
+      jobCategoryId: job_category_id
     };
   }
 
