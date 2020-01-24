@@ -76,6 +76,14 @@ const {
   DeleteProject,
 } = require('./app/Project');
 
+const {
+  GetJobPositions,
+  GetJobPosition,
+  CreateJobPosition,
+  UpdateJobPosition,
+  DeleteJobPosition,
+} = require('./app/JobPosition');
+
 const JobFamilySerializer = require('./interfaces/http/jobfamily/JobFamilySerializer');
 const JobDesignationSerializer = require('./interfaces/http/jobdesignation/JobDesignationSerializer');
 const JobRoleSerializer = require('./interfaces/http/jobrole/JobRoleSerializer');
@@ -85,6 +93,7 @@ const CompetencyGroupSerializer = require('./interfaces/http/competencygroup/Com
 const CompetencySerializer = require('./interfaces/http/competency/CompetencySerializer');
 const UserGroupSerializer = require('./interfaces/http/usergroup/UserGroupSerializer');
 const ProjectSerializer = require('./interfaces/http/project/ProjectSerializer');
+const JobPositionSerializer = require('./interfaces/http/jobposition/JobPositionSerializer');
 
 
 const Server = require('./interfaces/http/Server');
@@ -105,6 +114,7 @@ const SequelizeCompetencyGroupRepository = require('./infra/CompetencyGroup/Sequ
 const SequelizeCompetencyRepository = require('./infra/Competency/SequelizeCompetencyRepository');
 const SequelizeUserGroupRepository = require('./infra/UserGroup/UserGroupRepository');
 const SequelizeProjectRepository = require('./infra/Project/ProjectRepository');
+const SequelizeJobPositionRepository = require('./infra/JobPosition/JobPositionRepository');
 
 const { 
   database,
@@ -117,6 +127,7 @@ const {
   Competency: CompetencyModel,
   UserGroup: UserGroupModel,
   Project: ProjectModel,
+  JobPosition: JobPositionModel,
 } = require('./infra/database/models');
 
 
@@ -159,6 +170,7 @@ container.register({
   CompetencyRepository: asClass(SequelizeCompetencyRepository).singleton(),
   UserGroupRepository: asClass(SequelizeUserGroupRepository).singleton(),
   ProjectRepository: asClass(SequelizeProjectRepository).singleton(),
+  JobPositionRepository: asClass(SequelizeJobPositionRepository).singleton(),
 });
 
 // Database
@@ -173,6 +185,7 @@ container.register({
   CompetencyModel: asValue(CompetencyModel),
   UserGroupModel: asValue(UserGroupModel),
   ProjectModel: asValue(ProjectModel),
+  JobPositionModel: asValue(JobPositionModel),
 });
 
 // Operations
@@ -240,6 +253,12 @@ container.register({
   UpdateProject: asClass(UpdateProject),
   DeleteProject: asClass(DeleteProject),
 
+  // Job Position
+  GetJobPositions: asClass(GetJobPositions),
+  GetJobPosition: asClass(GetJobPosition),
+  CreateJobPosition: asClass(CreateJobPosition),
+  UpdateJobPosition: asClass(UpdateJobPosition),
+  DeleteJobPosition: asClass(DeleteJobPosition),
 });
 
 
@@ -254,6 +273,7 @@ container.register({
   CompetencySerializer: asValue(CompetencySerializer),
   UserGroupSerializer: asValue(UserGroupSerializer),
   ProjectSerializer: asValue(ProjectSerializer),
+  JobPositionSerializer: asValue(JobPositionSerializer),
 });
 
 module.exports = container;

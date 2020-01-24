@@ -18,7 +18,7 @@ const SequelizeJobDesignationMapper = {
 
     return {
       designation,
-      job_family_id
+      jobFamilyId: job_family_id
     };
   }
 };

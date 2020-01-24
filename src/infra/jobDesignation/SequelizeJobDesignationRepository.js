@@ -28,7 +28,8 @@ class SequelizeJobDesignationRepository {
       throw error;
     }
 
-    const new_job_designation = await this.JobDesignationModel.create(JobDesignationMapper.toDatabase(designation));
+    const job_designation = JobDesignationMapper.toDatabase(designation);
+    const new_job_designation = await this.JobDesignationModel.create(job_designation);
     return JobDesignationMapper.toEntity(new_job_designation);
   }
 
@@ -67,10 +68,7 @@ class SequelizeJobDesignationRepository {
   async _getById(id) {
     try {
       return await this.JobDesignationModel.findByPk(id, { 
-        rejectOnEmpty: true,
-        attributes: {
-          include: ['job_family_id']
-        } 
+        rejectOnEmpty: true
       });
     } catch(error) {
       if (error.name === 'SequelizeEmptyResultError') {
